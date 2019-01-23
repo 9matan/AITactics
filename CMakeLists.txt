@@ -41,10 +41,12 @@ include_directories(
 add_library(AITactics STATIC ${SOURCE_FILES} ${SOURCE_FILES_BOOST_DI})
 set_target_properties(AITactics PROPERTIES LINKER_LANGUAGE CXX)
 
+if(ATOMIC_AITACTICS_SUBMODULES)
 # Copy to Artifacts
-add_custom_command( TARGET AITactics POST_BUILD
-                COMMAND "${CMAKE_COMMAND}"
-                ARGS -E make_directory \"${ATOMIC_SOURCE_DIR}/Artifacts/AITactics\"
-                COMMAND "${CMAKE_COMMAND}"
-                ARGS -E copy_if_different \"$<TARGET_FILE:AITactics>\" \"${ATOMIC_SOURCE_DIR}/Artifacts/AITactics\"
-                COMMENT "Copying AITactics to Build Artifacts" )
+    add_custom_command( TARGET AITactics POST_BUILD
+                    COMMAND "${CMAKE_COMMAND}"
+                    ARGS -E make_directory \"${ATOMIC_SOURCE_DIR}/Artifacts/AITactics\"
+                    COMMAND "${CMAKE_COMMAND}"
+                    ARGS -E copy_if_different \"$<TARGET_FILE:AITactics>\" \"${ATOMIC_SOURCE_DIR}/Artifacts/AITactics\"
+                    COMMENT "Copying AITactics to Build Artifacts" )
+endif()
