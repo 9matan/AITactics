@@ -1,4 +1,4 @@
-option(AITACTICS_EXAMPLE ON)
+option(AITACTICS_EXAMPLE "Build the example project" ON)
 
 set(THIRDPARTY_PATH ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
@@ -12,6 +12,6 @@ endif()
 
 add_subdirectory(Engine)
 
-if(AITACTICS_EXAMPLE)
+if(AITACTICS_EXAMPLE MATCHES ON)
     add_subdirectory(Example)
 endif()

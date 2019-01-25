@@ -37,8 +37,8 @@ SourceGroupWithPaths("${SOURCE_FILES}")
 SourceGroupWithPaths("${SOURCE_FILES_CRCPP}")
 
 include_directories(
-    Source
-    Source/Implementation
+    ./Source
+    ./Source/Implementation
     ${BOOST_DI_INCLUDE}
     ${CRCPP_INCLUDE}
     )
@@ -51,7 +51,7 @@ add_library(${AITACTICS_ENGINE_TARGET} STATIC
     
 set_target_properties(${AITACTICS_ENGINE_TARGET} PROPERTIES LINKER_LANGUAGE CXX)
 
-if(ATOMIC_AITACTICS_SUBMODULES)
+if(ATOMIC_AITACTICS_SUBMODULES MATCHES ON)
 # Copy to Artifacts
     add_custom_command( TARGET ${AITACTICS_ENGINE_TARGET} POST_BUILD
                     COMMAND "${CMAKE_COMMAND}"
