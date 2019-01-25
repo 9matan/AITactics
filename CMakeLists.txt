@@ -12,6 +12,10 @@ if(NOT DEFINED BOOST_DI_INCLUDE)
     set(BOOST_DI_INCLUDE Submodules/BoostDI/include)
 endif()
 
+if(NOT DEFINED CRCPP_INCLUDE)
+    set(CRCPP_INCLUDE ThirdParty/CRCpp/inc)
+endif()
+
 file(
     GLOB_RECURSE SOURCE_FILES_BOOST_DI 
     LIST_DIRECTORIES false
@@ -32,13 +36,17 @@ file(
 
 SourceGroupWithPaths("${SOURCE_FILES}")
 
+set(SOURCE_FILES_CRCPP ${CRCPP_INCLUDE}/CRC.h)
+SourceGroupWithPaths("${SOURCE_FILES_CRCPP}")
+
 include_directories(
     Source
     Source/Implementation
     ${BOOST_DI_INCLUDE}
+    ${CRCPP_INCLUDE}
 )
 
-add_library(AITactics STATIC ${SOURCE_FILES} ${SOURCE_FILES_BOOST_DI})
+add_library(AITactics STATIC ${SOURCE_FILES} ${SOURCE_FILES_BOOST_DI} ${SOURCE_FILES_CRCPP})
 set_target_properties(AITactics PROPERTIES LINKER_LANGUAGE CXX)
 
 if(ATOMIC_AITACTICS_SUBMODULES)
