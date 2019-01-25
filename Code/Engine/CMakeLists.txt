@@ -28,8 +28,8 @@ file(
     GLOB_RECURSE SOURCE_FILES
     LIST_DIRECTORIES false
     RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-    "Source/*.c*"
-    "Source/*.h*"
+    "AITacticsEngine/*.c*"
+    "AITacticsEngine/*.h*"
 )
 
 SourceGroupWithPaths("${SOURCE_FILES_BOOST_DI}")
@@ -37,8 +37,8 @@ SourceGroupWithPaths("${SOURCE_FILES}")
 SourceGroupWithPaths("${SOURCE_FILES_CRCPP}")
 
 include_directories(
-    ./Source
-    ./Source/Implementation
+    ./AITacticsEngine
+    ./AITacticsEngine/Implementation
     ${BOOST_DI_INCLUDE}
     ${CRCPP_INCLUDE}
     )
