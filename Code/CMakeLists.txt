@@ -1,5 +1,3 @@
-option(AITACTICS_EXAMPLE "Build the example project" ON)
-
 set(THIRDPARTY_PATH ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 if(NOT DEFINED BOOST_DI_INCLUDE)
@@ -11,6 +9,8 @@ if(NOT DEFINED CRCPP_INCLUDE)
 endif()
 
 add_subdirectory(Engine)
+
+set(AITACTICS_ENGINE_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/Engine")
 
 if(AITACTICS_EXAMPLE MATCHES ON)
     add_subdirectory(Example)
