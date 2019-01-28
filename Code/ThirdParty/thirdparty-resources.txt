@@ -1,2 +1,3 @@
 CRCpp: https://github.com/d-bahr/CRCpp
 di-cpp14: https://github.com/boost-experimental/di
+googletest-master: https://github.com/google/googletest
