@@ -15,3 +15,12 @@ set(AITACTICS_ENGINE_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/Engine")
 if(AITACTICS_EXAMPLE MATCHES ON)
     add_subdirectory(Example)
 endif()
+
+if(AITACTICS_TEST MATCHES ON)
+    enable_testing()
+
+    set(BUILD_GMOCK OFF)
+    
+    add_subdirectory(${THIRDPARTY_PATH}/googletest-master)
+    add_subdirectory(Test_Engine)    
+endif()
