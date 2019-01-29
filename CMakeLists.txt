@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.6)
 project(AITactics)
 
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+
 function(SourceGroupWithPaths SOURCE_GROUP_FILES)
     foreach(_source IN ITEMS ${SOURCE_GROUP_FILES})
         get_filename_component(_source_path "${_source}" PATH)
