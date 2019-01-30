@@ -1,0 +1,85 @@
+@startuml
+Interface IData
+Interface IDataContainer
+Interface IDataHandler
+
+Interface IAIAction
+Interface IAIActionHandler
+
+Interface IAIAgent
+Interface IAIAgentDataHandler
+
+IDataContainer o-- IData
+IDataHandler <-- IData
+IAIAgentDataHandler <-- IData
+
+IAIAction <-- IDataContainer
+IAIActionHandler <-- IDataContainer
+IAIAgent <-- IDataContainer
+
+IAIAction <-- IDataHandler
+IAIActionHandler <-- IDataHandler
+
+IAIAgent <-- IAIAction
+
+IAIAgentDataHandler <-- IAIAgent
+
+IAIAgent <-- IAIAgentDataHandler
+
+IAIAgent <-- IAIActionHandler
+
+Interface IData
+{
+	CStringId GetDataTypeId() const;
+}
+
+Interface IDataContainer
+{
+	void AddData(IData unique* data);
+	void RemoveData(CStringId data);
+	
+	IData& GetDataByTypeId(CStringId dataTypeId);
+	IData const& GetDataByTypeId(CStringId dataTypeId) const;
+	
+	bool Contains(CStringId dataTypeId) const;
+}
+
+Interface IDataHandler
+{
+	void HandleData(IData const& data);
+}
+
+Interface IAIAction
+{
+	IDataContainer const& GetActionDataContainer() const;
+	IDataContainer& GetActionDataContainer();
+}
+
+Interface IAIActionHandler
+{
+	void HandleAction(IDataContainer const& actionData, IDataContainer const& agentData, IDataHandler& agentDataHandler);
+}
+
+Interface IAIAgent
+{
+	IDataContainer const& GetActionDataContainer() const;
+
+	void RegisterAction(IAIAction unique* action, IAIActionHandler& actionHandler);
+	IAIAction unique* UnregisterAction(IAIAction& action);
+	void ExecuteAction(IAIAction& action);
+	
+	void RegisterDataHandler(CStringId dataTypeId, IAIAgentDataHandler& agentDataHandler);
+	void UnregisterDataHandler(CStringId dataTypeId);
+	
+	U32 GetActionCount() const;
+	
+	IAIAction& GetAction(U32 actionIndex);
+	IAIAction const& GetAction(U32 actionIndex) const;
+}
+
+Interface IAIAgentDataHandler
+{
+	void HandleAgentData(IAIAgent& agent, IData const& data);
+}
+
+@enduml
