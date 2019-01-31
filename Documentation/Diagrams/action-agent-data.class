@@ -3,30 +3,29 @@ Interface IData
 Interface IDataContainer
 Interface IDataHandler
 
-Interface IAIAction
-Interface IAIActionHandler
+Interface IEventHandler
+Interface IEventHandlerContext
 
+Class CHandleActionEvent
+Interface IAIActionEventHandler
+Interface IAIAction
+
+Class CHandleAgentDataEvent
 Interface IAIAgent
-Interface IAIAgentDataHandler
+Interface IAIAgentDataEventHandler
 
 IDataContainer o-- IData
 IDataHandler <-- IData
-IAIAgentDataHandler <-- IData
 
-IAIAction <-- IDataContainer
-IAIActionHandler <-- IDataContainer
-IAIAgent <-- IDataContainer
+CHandleActionEvent <-- IAIActionEventHandler
+IEventHandler <|-- IAIActionEventHandler
 
-IAIAction <-- IDataHandler
-IAIActionHandler <-- IDataHandler
+CHandleAgentDataEvent <-- IAIAgentDataEventHandler
+IEventHandler <|-- IAIAgentDataEventHandler
 
-IAIAgent <-- IAIAction
+IEventHandler <-- IEventHandlerContext
 
-IAIAgentDataHandler <-- IAIAgent
-
-IAIAgent <-- IAIAgentDataHandler
-
-IAIAgent <-- IAIActionHandler
+IAIAgent o-- IAIAction
 
 Interface IData
 {
@@ -35,8 +34,8 @@ Interface IData
 
 Interface IDataContainer
 {
-	void AddData(IData unique* data);
-	void RemoveData(CStringId data);
+	void AddData(unique_ptr<IData> data);
+	unique_ptr<IData> RemoveData(CStringId data);
 	
 	IData& GetDataByTypeId(CStringId dataTypeId);
 	IData const& GetDataByTypeId(CStringId dataTypeId) const;
@@ -49,37 +48,61 @@ Interface IDataHandler
 	void HandleData(IData const& data);
 }
 
+Interface IEventHandler<TEvent>
+{
+	void HandleEvent(IEventHandlerContext<TEvent>& dataContext);
+}
+
+Interface IEventHandlerContext<TEvent>
+{
+	void OnEventHandled();
+	TEvent const& GetEvent() const;
+}
+
+Class CHandleActionEvent
+{
+	IDataContainer const& GetActionData() const;
+	IDataContainer const& GetAgentData() const;
+	IDataHandler& GetAgentDataHandler();
+}
+
+Interface IAIActionEventHandler
+{
+	void HandleEvent(IEventHandlerContext<CHandleActionEvent>& dataContext);
+}
+
 Interface IAIAction
 {
 	IDataContainer const& GetActionDataContainer() const;
 	IDataContainer& GetActionDataContainer();
 }
 
-Interface IAIActionHandler
+Class CHandleAgentDataEvent
 {
-	void HandleAction(IDataContainer const& actionData, IDataContainer const& agentData, IDataHandler& agentDataHandler);
+	IAIAgent& GetAgent();
+	IData const& GetData();
+}
+
+Interface IAIAgentDataEventHandler
+{
+	void HandleEvent(IEventHandlerContext<CHandleAgentDataEvent>& dataContext);
 }
 
 Interface IAIAgent
 {
 	IDataContainer const& GetActionDataContainer() const;
 
-	void RegisterAction(IAIAction unique* action, IAIActionHandler& actionHandler);
-	IAIAction unique* UnregisterAction(IAIAction& action);
+	void RegisterAction(unique_ptr<IAIAction> action, IEventHandler<CHandleActionEvent>& actionHandler);
+	unique_ptr<IAIAction> UnregisterAction(IAIAction& action);
 	void ExecuteAction(IAIAction& action);
 	
-	void RegisterDataHandler(CStringId dataTypeId, IAIAgentDataHandler& agentDataHandler);
+	void RegisterDataHandler(CStringId dataTypeId, IEventHandler<CHandleAgentDataEvent>& agentDataHandler);
 	void UnregisterDataHandler(CStringId dataTypeId);
 	
 	U32 GetActionCount() const;
 	
 	IAIAction& GetAction(U32 actionIndex);
 	IAIAction const& GetAction(U32 actionIndex) const;
-}
-
-Interface IAIAgentDataHandler
-{
-	void HandleAgentData(IAIAgent& agent, IData const& data);
 }
 
 @enduml
