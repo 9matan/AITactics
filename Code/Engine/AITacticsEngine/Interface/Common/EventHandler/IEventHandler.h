@@ -9,6 +9,7 @@ class IEventHandlerContext;
 template<typename TEvent>
 class IEventHandler
 {
+public:
     virtual void HandleEvent(IEventHandlerContext<TEvent>& eventContext) = 0;
 };
 
