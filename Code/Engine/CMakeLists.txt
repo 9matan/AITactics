@@ -29,8 +29,7 @@ SourceGroupWithPaths("${SOURCE_FILES}")
 SourceGroupWithPaths("${SOURCE_FILES_CRCPP}")
 
 include_directories(
-    ./AITacticsEngine
-    ./AITacticsEngine/Implementation
+    ./
     ${BOOST_DI_INCLUDE}
     ${CRCPP_INCLUDE}
     )

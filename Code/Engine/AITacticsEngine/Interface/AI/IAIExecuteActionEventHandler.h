@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interface/Common/EventHandler/IEventHandler.h"
+#include "AITacticsEngine/Interface/Common/EventHandler/IEventHandler.h"
 
 namespace AITactics
 {
@@ -15,6 +15,8 @@ struct SExecuteActionEvent
     IDataHandler& m_agentDataHandler;
 };
 
-using IAIexecuteActionEventHandler = IEventHandler<SExecuteActionEvent>;
+class IAIExecuteActionEventHandler : public IEventHandler<SExecuteActionEvent>
+{
+};
 
 } // namespace AITactics
