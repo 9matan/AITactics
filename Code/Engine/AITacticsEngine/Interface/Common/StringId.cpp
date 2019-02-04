@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interface/Common/StringId.h"
+#include "AITacticsEngine/Interface/Common/StringId.h"
 #include "CRC.h"
 
 #include <string.h>
