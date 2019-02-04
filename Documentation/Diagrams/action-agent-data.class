@@ -50,7 +50,7 @@ Interface IDataHandler
 
 Interface IEventHandler<TEvent>
 {
-	void HandleEvent(IEventHandlerContext<TEvent>& dataContext);
+	void HandleEvent(IEventHandlerContext<TEvent>& eventContext);
 }
 
 Interface IEventHandlerContext<TEvent>
@@ -59,16 +59,16 @@ Interface IEventHandlerContext<TEvent>
 	TEvent const& GetEvent() const;
 }
 
-Class CHandleActionEvent
+Class SHandleActionEvent
 {
-	IDataContainer const& GetActionData() const;
-	IDataContainer const& GetAgentData() const;
-	IDataHandler& GetAgentDataHandler();
+	IDataContainer const& actionDataContainer;
+	IDataContainer const& agentDataContainer;
+	IDataHandler& agentDataHandler;
 }
 
 Interface IAIActionEventHandler
 {
-	void HandleEvent(IEventHandlerContext<CHandleActionEvent>& dataContext);
+	void HandleEvent(IEventHandlerContext<SHandleActionEvent>& eventContext);
 }
 
 Interface IAIAction
@@ -77,26 +77,26 @@ Interface IAIAction
 	IDataContainer& GetActionDataContainer();
 }
 
-Class CHandleAgentDataEvent
+Class SHandleAgentDataEvent
 {
-	IAIAgent& GetAgent();
-	IData const& GetData();
+	IAIAgent& agent;
+	IData const& data;
 }
 
 Interface IAIAgentDataEventHandler
 {
-	void HandleEvent(IEventHandlerContext<CHandleAgentDataEvent>& dataContext);
+	void HandleEvent(IEventHandlerContext<SHandleAgentDataEvent>& eventContext);
 }
 
 Interface IAIAgent
 {
 	IDataContainer const& GetActionDataContainer() const;
 
-	void RegisterAction(unique_ptr<IAIAction> action, IEventHandler<CHandleActionEvent>& actionHandler);
+	void RegisterAction(unique_ptr<IAIAction> action, IAIActionEventHandler& actionHandler);
 	unique_ptr<IAIAction> UnregisterAction(IAIAction& action);
 	void ExecuteAction(IAIAction& action);
 	
-	void RegisterDataHandler(CStringId dataTypeId, IEventHandler<CHandleAgentDataEvent>& agentDataHandler);
+	void RegisterDataHandler(CStringId dataTypeId, IAIAgentDataEventHandler& agentDataHandler);
 	void UnregisterDataHandler(CStringId dataTypeId);
 	
 	U32 GetActionCount() const;
