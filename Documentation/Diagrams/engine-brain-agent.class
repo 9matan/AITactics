@@ -1,0 +1,98 @@
+@startuml
+
+Interface IAIEngine
+Interface IAIAgent
+Interface IAIBrain
+Interface IAIAgentBrain
+
+Interface IObjectFactory
+Interface IObjectCreator
+
+Class CObjectHandle
+Interface IObjectsManager
+Interface IAIAgentsManager
+Interface IAIBrainsManager
+
+IObjectFactory "1" o-- "many" IObjectCreator
+
+IAIEngine <-- SAIEngineParams
+
+IAIBrain <|-- IAIAgentBrain
+
+IObjectsManager <|-- IAIAgentsManager
+IObjectsManager <|-- IAIBrainsManager
+
+IAIAgentsManager "1" o-- "many" IAIAgent
+IAIBrainsManager "1" o-- "many" IAIBrain
+
+Class SAIEngineParams
+{
+}
+
+Interface IAIEngine
+{
+	IAIAgentsManager& GetAgentsManager();
+	IAIBrainsManager& GetBrainsManager();
+	
+	void Initialize(SAIEngineParams const& params);
+	void Shutdown();
+
+	void Update(float deltaTime);
+}
+
+Interface IObjectsManager<TObject, TObjectId = U32>
+{
+	void RegisterCreator(CStringId, unique_ptr<IObjectCreator<TObject>> creator);
+	CObjectHandle<IObjectManager<TObject>, TObject, TObjectId> CreateObject(IData const& data);
+	TObject* GetObject(TObjectId objectId);
+}
+
+class CObjectHandle<TProxy, TObject, TObjectId = U32>
+{
+	+ CObjectHandle();
+	+ CObjectHandle(TProxy* proxy, TObjectId objectId);
+
+	+ TObject* operator->();
+	+ bool IsValid();
+	
+	- TObjectId m_objectId;
+	- TProxy m_proxy;
+}
+
+Interface IAIAgentsManager<TObject = IAIAgent>
+{
+}
+
+Interface IAIBrainsManager<TObject = IAIBrain>
+{
+}
+
+Interface IAIAgent
+{
+	U32 GetAgentId() const;
+}
+
+Interface IAIBrain
+{
+	U32 GetBrainId() const;
+	void Update(float deltaTime);
+}
+
+Interface IAIAgentBrain
+{
+	void SetAgent(CAgentHandle& agent);
+	CAgentHandle GetAgent() const;
+}
+
+Interface IObjectFactory<TObject>
+{
+	unique_prt<TObject> CreateObject(IData const& data) const;
+	void RegisterCreator(CStringId stringId, unique_ptr<IObjectCreator<TObject>> creator);
+}
+
+Interface IObjectCreator<TObject>
+{
+	unique_prt<TObject> CreateObject(IData const& data);
+}
+
+@enduml
