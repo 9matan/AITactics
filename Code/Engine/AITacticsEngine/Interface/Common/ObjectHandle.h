@@ -38,7 +38,7 @@ public:
 
 	inline TObject* GetObjectPtr() const
 	{
-		assert(proxy && "Proxy must not be null");
+		assert(m_proxy && "Proxy must not be null");
 		return GetObjectPtrById<TObject, TProxy, TObjectId>(m_proxy, m_objectId);
 	}
     
