@@ -67,10 +67,30 @@ TEST(CObjectHandle, GetObjectPtr_ValidHandle)
 	EXPECT_TRUE(validObjectHandle.GetObjectPtr() == &testObject);
 }
 
+TEST(CObjectHandle, GetObjectPtr_InvalidId)
+{
+    CTestProxy testProxy;
+    CTestObjectHandle invalidObjectHandle(&testProxy, 0);
+
+    EXPECT_TRUE(invalidObjectHandle.GetObjectPtr() == nullptr);
+}
+
+TEST(CObjectHandle, CObjectHandle_InvalidProxy)
+{
+    EXPECT_DEATH(CTestObjectHandle invalidObjectHandle(nullptr, 0), "proxy");
+}
+
 TEST(CObjectHandle, ArrowOperator_ValidHandle)
 {
 	CTestProxy testProxy;
 	CTestObjectHandle validObjectHandle(&testProxy, 1);
 
 	EXPECT_TRUE(validObjectHandle->m_intVar == testObject.m_intVar);
+}
+
+TEST(CObjectHandle, ArrowOperator_InvalidId)
+{
+    CTestProxy testProxy;
+    CTestObjectHandle validObjectHandle(&testProxy, 0);
+    EXPECT_DEATH(validObjectHandle->m_intVar, "handle");
 }

@@ -23,7 +23,7 @@ public:
         : m_proxy(proxy)
         , m_objectId(objectId)
     {
-        assert(proxy && "Proxy must not be null");
+        assert(proxy && "proxy must not be null");
     }
     
 	inline bool IsValid() const
@@ -33,12 +33,13 @@ public:
     
     inline TObject* operator->() const
     {
+        assert(IsValid() && "handle is not valid");
         return GetObjectPtr();
     }
 
 	inline TObject* GetObjectPtr() const
 	{
-		assert(m_proxy && "Proxy must not be null");
+		assert(m_proxy && "proxy must not be null");
 		return GetObjectPtrById<TObject, TProxy, TObjectId>(m_proxy, m_objectId);
 	}
     
