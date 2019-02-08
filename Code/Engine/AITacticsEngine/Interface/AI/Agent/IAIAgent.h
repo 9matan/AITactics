@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "AITacticsEngine/Interface/AI/Agent/AIAgentId.h"
 #include "AITacticsEngine/Interface/Common/StringId.h"
 
 namespace AITactics
@@ -15,6 +16,7 @@ class IAIAgentDataEventHandler;
 class IAIAgent
 {
 public:
+    virtual AIAgentId GetAgentId() const = 0;
     virtual IDataContainer const& GetAgentDataContainer() const = 0;
 
     virtual void RegisterAction(std::unique_ptr<IAIAction> action, IAIExecuteActionEventHandler& actionHandler) = 0;
@@ -29,5 +31,7 @@ public:
     virtual IAIAction& GetAction(size_t const actionIndex) = 0;
     virtual IAIAction const& GetAction(size_t const actionIndex) const = 0;
 };
+
+
 
 } // namespace AITactics
