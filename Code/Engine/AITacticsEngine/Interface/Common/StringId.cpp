@@ -5,11 +5,6 @@
 
 #include <string.h>
 
-namespace
-{
-static auto const CRCTable = CRC::CRC_32().MakeTable();
-}
-
 namespace AITactics
 {
     
@@ -19,8 +14,9 @@ CStringId::CStringId()
 }
 
 CStringId::CStringId(char const* const str)
-    : m_id(CRC::Calculate(str, strlen(str), CRCTable))
 {
+    static auto const CRCTable = CRC::CRC_32().MakeTable();
+    m_id = CRC::Calculate(str, strlen(str), CRCTable);
 }
 
 bool CStringId::operator==(CStringId const other) const
