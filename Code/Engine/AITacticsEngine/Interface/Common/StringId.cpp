@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AITacticsEngine/AITacticsEngine_PCH.h"
+
 #include "AITacticsEngine/Interface/Common/StringId.h"
 #include "CRC.h"
 
