@@ -16,6 +16,8 @@ struct SAgentDataEvent
 
 class IAIAgentDataEventHandler : public IEventHandler<SAgentDataEvent>
 {
+public:
+    virtual ~IAIAgentDataEventHandler() {}
 };
 
 } // namespace AITactics

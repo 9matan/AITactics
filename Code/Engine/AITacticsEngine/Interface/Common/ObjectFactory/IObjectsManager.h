@@ -18,6 +18,7 @@ class IObjectsManager
 public:
     using CHandle = CObjectHandle<TObject, IObjectsManager<TObject, TObjectId>, TObjectId>;
 
+    virtual ~IObjectsManager() {}
     virtual CHandle CreateObject(IData const& data) = 0;
     virtual void RegisterCreator(CStringId const dataTypeId, std::unique_ptr<IObjectCreator<TObject>> creator) = 0;
     virtual TObject* GetObject(TObjectId objectId) = 0;

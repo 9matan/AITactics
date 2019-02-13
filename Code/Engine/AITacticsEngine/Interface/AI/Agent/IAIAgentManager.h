@@ -10,7 +10,10 @@ namespace AITactics
 class IAIAgent;
 
 class IAIAgentsManager : public IObjectsManager<IAIAgent, AIAgentId>
-{};
+{
+public:
+    virtual ~IAIAgentsManager() {}
+};
 
 template<>
 IAIAgent* GetObjectPtrById(IAIAgentsManager* aiAgentsManager, AIAgentId const agentId)

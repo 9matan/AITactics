@@ -17,6 +17,8 @@ struct SExecuteActionEvent
 
 class IAIExecuteActionEventHandler : public IEventHandler<SExecuteActionEvent>
 {
+public:
+    virtual ~IAIExecuteActionEventHandler() {}
 };
 
 } // namespace AITactics

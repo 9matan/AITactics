@@ -10,6 +10,7 @@ namespace AITactics
 class IDataContainer
 {
 public:
+    virtual ~IDataContainer() {}
     virtual void AddData(std::unique_ptr<IData> data) = 0;
     virtual std::unique_ptr<IData> RemoveData(CStringId const dataTypeId) = 0;
 

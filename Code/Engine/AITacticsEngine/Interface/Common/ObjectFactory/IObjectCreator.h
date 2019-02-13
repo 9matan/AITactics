@@ -11,6 +11,7 @@ template<typename TObject>
 class IObjectCreator
 {
 public:
+    virtual ~IObjectCreator() {}
     virtual std::unique_ptr<TObject> CreateObject(IData const& data) = 0;
 };
 

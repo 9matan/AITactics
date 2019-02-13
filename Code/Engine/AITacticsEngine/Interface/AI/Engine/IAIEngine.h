@@ -10,6 +10,7 @@ struct SAIEngineParams;
 class IAIEngine
 {
 public:
+    virtual ~IAIEngine() {}
     virtual void Initialize(SAIEngineParams const& engineParams) = 0;
     virtual void Shutdown() = 0;
 

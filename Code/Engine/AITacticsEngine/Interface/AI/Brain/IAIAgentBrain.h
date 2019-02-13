@@ -9,6 +9,7 @@ namespace AITactics
 class IAIAgentBrain : public IAIBrain
 {
 public:
+    virtual ~IAIAgentBrain() {}
     virtual void SetAgent(CAIAgentHandle& agent) = 0;
     virtual CAIAgentHandle GetAgent() const = 0;
 };

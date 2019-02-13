@@ -8,6 +8,7 @@ class IData;
 class IDataHandler
 {
 public:
+    virtual ~IDataHandler() {}
     virtual void HandleData(IData const& data) const = 0;
 };
 

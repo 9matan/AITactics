@@ -8,6 +8,7 @@ namespace AITactics
 class IData
 {
 public:
+    virtual ~IData() {}
     virtual CStringId GetDataTypeId() const = 0;
 };
 

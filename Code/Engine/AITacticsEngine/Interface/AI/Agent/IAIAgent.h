@@ -16,6 +16,8 @@ class IAIAgentDataEventHandler;
 class IAIAgent
 {
 public:
+    virtual ~IAIAgent() {}
+
     virtual AIAgentId GetAgentId() const = 0;
     virtual IDataContainer const& GetAgentDataContainer() const = 0;
 

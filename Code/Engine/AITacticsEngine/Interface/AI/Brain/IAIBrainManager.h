@@ -10,7 +10,10 @@ namespace AITactics
 class IAIBrain;
 
 class IAIBrainsManager : public IObjectsManager<IAIBrain, AIBrainId>
-{};
+{
+public:
+    virtual ~IAIBrainsManager() {}
+};
 
 template<>
 IAIBrain* GetObjectPtrById(IAIBrainsManager* aiBrainsManager, AIBrainId const brainId)

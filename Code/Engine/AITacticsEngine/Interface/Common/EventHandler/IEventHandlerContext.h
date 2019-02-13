@@ -7,6 +7,7 @@ template<typename TEvent>
 class IEventHandlerContext
 {
 public:
+    virtual ~IDataContainer() {}
     virtual void OnEventHandled() = 0;
     virtual TEvent const& GetEvent() const = 0;
 };
