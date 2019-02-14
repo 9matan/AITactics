@@ -19,7 +19,7 @@ endif()
 if(AITACTICS_TEST MATCHES ON)
     enable_testing()
 
-    set(BUILD_GMOCK OFF)
+    set(BUILD_GMOCK ON)
     
     add_subdirectory(${THIRDPARTY_PATH}/googletest-master)
     add_subdirectory(Test_AITacticsEngine)
