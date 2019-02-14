@@ -9,7 +9,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include <cassert>
+#include <algorithm>
 
 
 // TODO: reference additional headers your program requires here

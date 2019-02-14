@@ -8,12 +8,12 @@ if(NOT DEFINED CRCPP_INCLUDE)
     set(CRCPP_INCLUDE ${THIRDPARTY_PATH}/CRCpp/inc)
 endif()
 
-add_subdirectory(Engine)
+set(AITACTICS_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}")
 
-set(AITACTICS_ENGINE_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/Engine")
+add_subdirectory(AITacticsEngine)
 
 if(AITACTICS_EXAMPLE MATCHES ON)
-    add_subdirectory(Example)
+    add_subdirectory(AITacticsExample)
 endif()
 
 if(AITACTICS_TEST MATCHES ON)
@@ -22,5 +22,5 @@ if(AITACTICS_TEST MATCHES ON)
     set(BUILD_GMOCK OFF)
     
     add_subdirectory(${THIRDPARTY_PATH}/googletest-master)
-    add_subdirectory(Test_Engine)    
+    add_subdirectory(Test_AITacticsEngine)
 endif()
