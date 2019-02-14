@@ -16,6 +16,6 @@ include_directories(
 
 add_executable(Test_AITacticsEngine ${TEST_ENGINE_SOURCE})
 
-target_link_libraries(Test_AITacticsEngine gtest AITacticsEngine)
+target_link_libraries(Test_AITacticsEngine gtest gmock AITacticsEngine)
 
 add_test(NAME Test_AITacticsEngine COMMAND Test_AITacticsEngine)
