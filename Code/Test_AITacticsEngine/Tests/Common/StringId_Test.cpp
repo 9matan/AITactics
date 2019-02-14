@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "AITacticsEngine/Interface/Common/StringId.h"
 
-TEST(CStringIdTest, Equality1)
+TEST(CStringId_Test, Equality1)
 {
     using namespace AITactics;
 
@@ -11,7 +11,7 @@ TEST(CStringIdTest, Equality1)
     EXPECT_TRUE(helloWorldId1 == helloWorldId2);
 }
 
-TEST(CStringIdTest, Equality2)
+TEST(CStringId_Test, Equality2)
 {
     using namespace AITactics;
 
@@ -21,7 +21,7 @@ TEST(CStringIdTest, Equality2)
     EXPECT_TRUE(randomTextId1 == randomTextId2);
 }
 
-TEST(CStringIdTest, CaseSensitive)
+TEST(CStringId_Test, CaseSensitive)
 {
     using namespace AITactics;
 

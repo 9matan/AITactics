@@ -8,13 +8,13 @@ DEFINE_DATA_TYPE(CTestData)
 
 using namespace AITactics;
 
-TEST(DataType, GetClassId_EqualsToClassStringId)
+TEST(DataType_Test, GetClassId_EqualsToClassStringId)
 {
     CStringId const classStringId("CTestData");
     EXPECT_EQ(classStringId, CTestData::GetClassId());
 }
 
-TEST(DataType, GetDataTypeId_EqualsToClassStringId)
+TEST(DataType_Test, GetDataTypeId_EqualsToClassStringId)
 {
     CStringId const classStringId("CTestData");
     CTestData testData;
