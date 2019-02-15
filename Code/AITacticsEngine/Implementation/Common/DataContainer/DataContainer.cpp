@@ -14,12 +14,8 @@ void CDataContainer::AddData(std::unique_ptr<IData> data)
 
 std::unique_ptr<IData> CDataContainer::RemoveData(CStringId const dataTypeId)
 {
+    assert(ContainsData(dataTypeId) && "There is no data with such a type to delete");
     auto const dataIter = FindData(dataTypeId);
-    if (dataIter == m_data.end())
-    {
-        return std::move(std::unique_ptr<IData>(nullptr));
-    }
-
     auto data = std::move(*dataIter);
     m_data.erase(dataIter);
     return std::move(data);
