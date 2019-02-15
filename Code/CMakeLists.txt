@@ -22,5 +22,5 @@ if(AITACTICS_TEST MATCHES ON)
     set(BUILD_GMOCK ON)
     
     add_subdirectory(${THIRDPARTY_PATH}/googletest-master)
-    add_subdirectory(Test_AITacticsEngine)
+    add_subdirectory(AITacticsEngine_Test)
 endif()
