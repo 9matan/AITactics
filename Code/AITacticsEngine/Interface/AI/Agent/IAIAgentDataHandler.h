@@ -8,16 +8,18 @@ namespace AITactics
 class IAIAgent;
 class IData;
 
-struct SAgentDataEvent
+struct SAgentDataHandlerEvent
 {
     IAIAgent& m_agent;
     IData& m_data;
 };
 
-class IAIAgentDataEventHandler : public IEventHandler<SAgentDataEvent>
+class IAIAgentDataHandler
 {
 public:
-    virtual ~IAIAgentDataEventHandler() {}
+    virtual ~IAIAgentDataHandler() {}
+
+    virtual void HandleAgentData(SAgentDataHandlerEvent& event) = 0;
 };
 
 } // namespace AITactics
