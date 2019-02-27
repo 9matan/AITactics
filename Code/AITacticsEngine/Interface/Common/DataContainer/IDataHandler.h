@@ -9,7 +9,7 @@ class IDataHandler
 {
 public:
     virtual ~IDataHandler() {}
-    virtual void HandleData(IData const& data) const = 0;
+    virtual void HandleData(IData const& data) = 0;
 };
 
 } // namespace AITactics

@@ -1,17 +1,15 @@
 #pragma once
 
-#include "AITacticsEngine/Interface/Common/EventHandler/IEventHandler.h"
-
 namespace AITactics
 {
 
 class IAIAgent;
 class IData;
 
-struct SAgentDataHandlerEvent
+struct SAgentDataHandlerData
 {
-    IAIAgent& m_agent;
-    IData& m_data;
+    IAIAgent* m_agent;
+    IData const* m_data;
 };
 
 class IAIAgentDataHandler
@@ -19,7 +17,7 @@ class IAIAgentDataHandler
 public:
     virtual ~IAIAgentDataHandler() {}
 
-    virtual void HandleAgentData(SAgentDataHandlerEvent& event) = 0;
+    virtual void HandleAgentData(SAgentDataHandlerData& handlerData) = 0;
 };
 
 } // namespace AITactics

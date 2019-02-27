@@ -8,18 +8,20 @@ namespace AITactics
 class IDataContainer;
 class IDataHandler;
 
-struct SActionHandlerEvent
+struct SActionExecutionData
 {
-    IDataContainer const& m_actionDataContainer;
-    IDataContainer const& m_agentDataContainer;
-    IDataHandler& m_agentDataHandler;
+    IDataContainer const* m_actionDataContainer;
+    IDataContainer const* m_executionDataContainer;
+    IDataContainer const* m_agentDataContainer;
+    IDataHandler* m_agentDataHandler;
 };
 
 class IAIActionHandler
 {
 public:
     virtual ~IAIActionHandler() {}
-    virtual void HandleAction(SActionHandlerEvent& event) = 0;
+    virtual bool CanExecuteAction(SActionExecutionData& executionData) const = 0;
+    virtual void ExecuteAction(SActionExecutionData& executionData) = 0;
 };
 
 } // namespace AITactics
