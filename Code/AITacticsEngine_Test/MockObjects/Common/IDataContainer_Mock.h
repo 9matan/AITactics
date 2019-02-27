@@ -8,6 +8,9 @@
 namespace AITactics_Test
 {
 
+#pragma warning(push)
+#pragma warning(disable : 4373)
+
 class IDataContainer_Mock : public AITactics::IDataContainer
 {
 public:
@@ -19,5 +22,7 @@ public:
 
     MOCK_CONST_METHOD1(ContainsData, bool(AITactics::CStringId const));
 };
+
+#pragma warning(pop)
 
 } // namespace AITactics_Test
