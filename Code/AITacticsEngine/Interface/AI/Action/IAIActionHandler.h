@@ -1,7 +1,5 @@
 #pragma once
 
-#include "AITacticsEngine/Interface/Common/EventHandler/IEventHandler.h"
-
 namespace AITactics
 {
 
