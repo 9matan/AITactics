@@ -13,8 +13,8 @@ public:
     virtual void AddData(std::unique_ptr<IData> data) override;
     virtual std::unique_ptr<IData> RemoveData(CStringId const dataTypeId) override;
 
-    virtual IData* GetDataByTypeId(CStringId const dataTypeId) override;
-    virtual IData const* GetDataByTypeId(CStringId const dataTypeId) const override;
+    virtual IData& GetDataByTypeId(CStringId const dataTypeId) override;
+    virtual IData const& GetDataByTypeId(CStringId const dataTypeId) const override;
 
     virtual bool ContainsData(CStringId const dataTypeId) const override;
 

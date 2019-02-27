@@ -21,18 +21,18 @@ std::unique_ptr<IData> CDataContainer::RemoveData(CStringId const dataTypeId)
     return std::move(data);
 }
 
-IData* CDataContainer::GetDataByTypeId(CStringId const dataTypeId)
+IData& CDataContainer::GetDataByTypeId(CStringId const dataTypeId)
 {
     assert(ContainsData(dataTypeId) && "There is no data with such a type");
     auto const dataIter = FindData(dataTypeId);
-    return dataIter->get();
+    return *dataIter->get();
 }
 
-IData const* CDataContainer::GetDataByTypeId(CStringId const dataTypeId) const
+IData const& CDataContainer::GetDataByTypeId(CStringId const dataTypeId) const
 {
     assert(ContainsData(dataTypeId) && "There is no data with such a type");
     auto const dataIter = FindData(dataTypeId);
-    return dataIter->get();
+    return *dataIter->get();
 }
 
 bool CDataContainer::ContainsData(CStringId const dataTypeId) const

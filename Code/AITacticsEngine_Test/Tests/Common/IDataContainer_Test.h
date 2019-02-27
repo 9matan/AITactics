@@ -1,3 +1,5 @@
+#pragma once
+
 #include "gtest/gtest.h"
 
 #include <memory>
@@ -17,7 +19,7 @@ class IDataContainer_Test : public testing::TestWithParam<CreatorIDataContainer>
 public:
     virtual void SetUp() override
     {
-        m_dataContainer = GetParam()();
+        m_dataContainer = std::move(GetParam()());
     }
 
 protected:
@@ -56,7 +58,7 @@ TEST_P(IDataContainer_Test, AddData_GetDataByTypeId)
 
     m_dataContainer->AddData(std::move(data1));
 
-    EXPECT_TRUE(m_dataContainer->GetDataByTypeId(data1TypeId)->GetDataTypeId() == data1TypeId);
+    EXPECT_TRUE(m_dataContainer->GetDataByTypeId(data1TypeId).GetDataTypeId() == data1TypeId);
 }
 
 TEST_P(IDataContainer_Test, GetDataByTypeId_NotExistingData)
