@@ -36,14 +36,14 @@ CTestObject* GetObjectPtrById(CTestProxy* proxy, unsigned int const objectId)
 
 using CTestObjectHandle = AITactics::CObjectHandle<CTestObject, CTestProxy, unsigned int>;
 
-TEST(CObjectHandle_Test, IsValid_NullProxy)
+TEST(CObjectHandle_Test, IsValid_NullProxy_ReturnsFalse)
 {
 	CTestObjectHandle invalidObjectHandle;
 
 	EXPECT_FALSE(invalidObjectHandle.IsValid());
 }
 
-TEST(CObjectHandle_Test, IsValid_InvalidId)
+TEST(CObjectHandle_Test, IsValid_InvalidId_ReturnsFalse)
 {
 	CTestProxy testProxy;
 	CTestObjectHandle invalidObjectHandle(&testProxy, 0);
@@ -51,7 +51,7 @@ TEST(CObjectHandle_Test, IsValid_InvalidId)
 	EXPECT_FALSE(invalidObjectHandle.IsValid());
 }
 
-TEST(CObjectHandle_Test, IsValid_ValidHandle)
+TEST(CObjectHandle_Test, IsValid_ValidHandle_ReturnsTrue)
 {
 	CTestProxy testProxy;
 	CTestObjectHandle validObjectHandle(&testProxy, 1);
@@ -59,7 +59,7 @@ TEST(CObjectHandle_Test, IsValid_ValidHandle)
 	EXPECT_TRUE(validObjectHandle.IsValid());
 }
 
-TEST(CObjectHandle_Test, GetObjectPtr_ValidHandle)
+TEST(CObjectHandle_Test, GetObjectPtr_ValidHandle_ReturnsValidPtr)
 {
 	CTestProxy testProxy;
 	CTestObjectHandle validObjectHandle(&testProxy, 1);
@@ -67,7 +67,7 @@ TEST(CObjectHandle_Test, GetObjectPtr_ValidHandle)
 	EXPECT_TRUE(validObjectHandle.GetObjectPtr() == &testObject);
 }
 
-TEST(CObjectHandle_Test, GetObjectPtr_InvalidId)
+TEST(CObjectHandle_Test, GetObjectPtr_InvalidId_ReturnsNullPtr)
 {
     CTestProxy testProxy;
     CTestObjectHandle invalidObjectHandle(&testProxy, 0);
@@ -75,12 +75,7 @@ TEST(CObjectHandle_Test, GetObjectPtr_InvalidId)
     EXPECT_TRUE(invalidObjectHandle.GetObjectPtr() == nullptr);
 }
 
-TEST(CObjectHandle_Test, CObjectHandle_InvalidProxy)
-{
-    EXPECT_DEATH(CTestObjectHandle invalidObjectHandle(nullptr, 0), "proxy");
-}
-
-TEST(CObjectHandle_Test, ArrowOperator_ValidHandle)
+TEST(CObjectHandle_Test, ArrowOperator_ValidHandle_ReturnsValidPtr)
 {
 	CTestProxy testProxy;
 	CTestObjectHandle validObjectHandle(&testProxy, 1);
@@ -88,7 +83,7 @@ TEST(CObjectHandle_Test, ArrowOperator_ValidHandle)
 	EXPECT_TRUE(validObjectHandle->m_intVar == testObject.m_intVar);
 }
 
-TEST(CObjectHandle_Test, ArrowOperator_InvalidId)
+TEST(CObjectHandle_Test, ArrowOperator_InvalidId_HandleAssert)
 {
     CTestProxy testProxy;
     CTestObjectHandle validObjectHandle(&testProxy, 0);

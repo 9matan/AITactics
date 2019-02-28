@@ -23,7 +23,6 @@ public:
         : m_proxy(proxy)
         , m_objectId(objectId)
     {
-        assert(proxy && "proxy must not be null");
     }
     
 	inline bool IsValid() const
