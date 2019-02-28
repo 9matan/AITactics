@@ -24,6 +24,8 @@ IDataContainer const& CAIAgent::GetAgentDataContainer() const
 
 void CAIAgent::AddAction(std::unique_ptr<IAIAction> action, IAIActionHandler* actionHandler)
 {
+    assert(bool(action) && "The action is not valid");
+
     SActionEntry actionEntry;
     actionEntry.m_action = std::move(action);
     actionEntry.m_actionHandler = actionHandler;
