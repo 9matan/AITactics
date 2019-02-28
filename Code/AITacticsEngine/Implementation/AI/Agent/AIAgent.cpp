@@ -31,8 +31,16 @@ void CAIAgent::AddAction(std::unique_ptr<IAIAction> action, IAIActionHandler* ac
     m_actions.emplace_back(std::move(actionEntry));
 }
 
-void CAIAgent::RegisterData(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler)
+void CAIAgent::SetDataHandler(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler)
 {
+    auto const dataHandlerIter = std::find(m_dataHandlers.begin(), m_dataHandlers.end(), dataTypeId);
+
+    if (dataHandlerIter != m_dataHandlers.end())
+    {
+        dataHandlerIter->m_agentDataHandler = agentDataHandler;
+        return;
+    }
+
     SDataHandlerEntry dataHandlerEntry;
     dataHandlerEntry.m_dataTypeId = dataTypeId;
     dataHandlerEntry.m_agentDataHandler = agentDataHandler;
@@ -40,7 +48,7 @@ void CAIAgent::RegisterData(CStringId const dataTypeId, IAIAgentDataHandler* age
     m_dataHandlers.emplace_back(std::move(dataHandlerEntry));
 }
 
-void CAIAgent::UnregisterData(CStringId const dataTypeId)
+void CAIAgent::ResetDataHandler(CStringId const dataTypeId)
 {
     auto const dataHandlerIter = std::remove(m_dataHandlers.begin(), m_dataHandlers.end(), dataTypeId);
 

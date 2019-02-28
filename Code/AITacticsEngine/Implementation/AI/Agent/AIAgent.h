@@ -18,8 +18,8 @@ public:
 
 	virtual void AddAction(std::unique_ptr<IAIAction> action, IAIActionHandler* actionHandler) override;
 
-	virtual void RegisterData(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler) override;
-	virtual void UnregisterData(CStringId const dataTypeId) override;
+	virtual void SetDataHandler(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler) override;
+	virtual void ResetDataHandler(CStringId const dataTypeId) override;
     virtual void HandleData(IData const& data) override;
 
 	virtual size_t GetActionCount() const override;

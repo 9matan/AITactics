@@ -24,8 +24,8 @@ public:
 
     virtual void AddAction(std::unique_ptr<IAIAction> action, IAIActionHandler* actionHandler) = 0;
 
-    virtual void RegisterData(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler) = 0;
-    virtual void UnregisterData(CStringId const dataTypeId) = 0;
+    virtual void SetDataHandler(CStringId const dataTypeId, IAIAgentDataHandler* agentDataHandler) = 0;
+    virtual void ResetDataHandler(CStringId const dataTypeId) = 0;
 
     virtual size_t GetActionCount() const = 0;
     virtual IAIAction const& GetAction(size_t const actionIndex) const = 0;
