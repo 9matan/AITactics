@@ -3,7 +3,7 @@
 #include "AITacticsEngine/Interface/Common/DataContainer/IData.h"
 
 #define DECLARE_DATA_TYPE_BEGIN(DataType) \
-class DataType : public AITactics::IData \
+class DataType final : public AITactics::IData \
 { \
     public: \
         static AITactics::CStringId GetClassId() { return ms_dataTypeId; } \
