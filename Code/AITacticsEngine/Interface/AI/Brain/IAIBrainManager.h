@@ -7,20 +7,11 @@
 namespace AITactics
 {
 
-class IAIBrain;
-
-class IAIBrainsManager : public IObjectsManager<IAIBrain, AIBrainId>
-{
-public:
-    virtual ~IAIBrainsManager() {}
-};
-
-template<>
-IAIBrain* GetObjectPtrById(IAIBrainsManager* aiBrainsManager, AIBrainId const brainId)
-{
-    return aiBrainsManager->GetObject(brainId);
-}
-
-using CAIBrainHandle = IAIBrainsManager::CHandle;
+DECLARE_DEFAULT_OBJECTS_MANAGER_INTERFACE(
+    IAIBrainsManager,
+    IAIBrain,
+    AIBrainId,
+    CAIBrainHandle
+)
 
 } // namespace AITactics

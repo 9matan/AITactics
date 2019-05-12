@@ -7,20 +7,11 @@
 namespace AITactics
 {
 
-class IAIAgent;
-
-class IAIAgentsManager : public IObjectsManager<IAIAgent, AIAgentId>
-{
-public:
-    virtual ~IAIAgentsManager() {}
-};
-
-template<>
-IAIAgent* GetObjectPtrById(IAIAgentsManager* aiAgentsManager, AIAgentId const agentId)
-{
-    return aiAgentsManager->GetObject(agentId);
-}
-
-using CAIAgentHandle = IAIAgentsManager::CHandle;
+DECLARE_DEFAULT_OBJECTS_MANAGER_INTERFACE(
+    IAIAgentsManager,
+    IAIAgent,
+    AIAgentId,
+    CAIAgentHandle
+)
 
 } // namespace AITactics

@@ -3,20 +3,18 @@
 #include <memory>
 
 #include "AITacticsEngine/Interface/Common/StringId.h"
+#include "AITacticsEngine/Interface/Common/ObjectFactory/IObjectCreator.h"
 
 namespace AITactics
 {
 
-template<typename TObject>
-class IObjectCreator;
 class IData;
 
 template<typename TObject>
-class IObjectFactory
+class IObjectFactory : public IObjectCreator<TObject>
 {
 public:
     virtual ~IObjectFactory() {}
-    virtual std::unique_ptr<TObject> CreateObject(IData const& data) = 0;
     virtual void RegisterCreator(CStringId const dataTypeId, std::unique_ptr<IObjectCreator<TObject>> creator) = 0;
 };
 
